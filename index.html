@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>خارطة طريق تخصص تعليم اللغة الإنجليزية والأدب</title>
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      --card-bg: #ffffff;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+      --border-color: #e2e8f0;
+      --radius-xl: 20px;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      /* Phase Colors */
+      --c1: #6366f1; --c1-bg: #eeedfe;
+      --c2: #10b981; --c2-bg: #e1f5ee;
+      --c3: #f59e0b; --c3-bg: #faeeda;
+      --c4: #f97316; --c4-bg: #facec7;
+      --c5: #3b82f6; --c5-bg: #e6f1fb;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-primary);
+      padding: 2rem 1rem;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .page-header h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.025em;
+    }
+    .page-header p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    /* Top Summary Navigation */
+    .header-summary {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 3rem;
+    }
+    .summary-step {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 16px 8px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .summary-step::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 4px;
+      background: transparent;
+      transition: var(--transition);
+    }
+    .summary-step:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: transparent;
+    }
+    .s1:hover::before { background: var(--c1); }
+    .s2:hover::before { background: var(--c2); }
+    .s3:hover::before { background: var(--c3); }
+    .s4:hover::before { background: var(--c4); }
+    .s5:hover::before { background: var(--c5); }
+
+    .summary-num { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+    .summary-name { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+    
+    .s1 .summary-num { color: var(--c1); }
+    .s2 .summary-num { color: var(--c2); }
+    .s3 .summary-num { color: var(--c3); }
+    .s4 .summary-num { color: var(--c4); }
+    .s5 .summary-num { color: var(--c5); }
+
+    /* Timeline Container */
+    .roadmap-timeline {
+      position: relative;
+    }
+
+    /* Phase Card Styles */
+    .phase-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .phase-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: #cbd5e1;
+    }
+
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 1.5rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .phase-badge {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem; font-weight: 700;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+    .p1 .phase-badge { background: var(--c1-bg); color: var(--c1); }
+    .p2 .phase-badge { background: var(--c2-bg); color: var(--c2); }
+    .p3 .phase-badge { background: var(--c3-bg); color: var(--c3); }
+    .p4 .phase-badge { background: var(--c4-bg); color: var(--c4); }
+    .p5 .phase-badge { background: var(--c5-bg); color: var(--c5); }
+
+    .phase-title-block { flex: 1; }
+    .phase-title { font-size: 1.15rem; font-weight: 700; color: #0f172a; }
+    .phase-subtitle { font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px; font-weight: 500; }
+
+    .phase-duration {
+      font-size: 0.85rem; font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 30px;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+
+    .chevron {
+      display: flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; color: var(--text-secondary);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .chevron svg { width: 20px; height: 20px; fill: currentColor; }
+    .open .chevron { transform: rotate(180deg); color: #0f172a; }
+
+    /* Accordion Body Integration */
+    .phase-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+      padding: 0 1.5rem;
+    }
+    .phase-body.show {
+      max-height: 2000px; /* High enough to encapsulate content smoothly */
+      padding: 0 1.5rem 2rem 1.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* Inner Sections styling */
+    .section-label {
+      font-size: 0.8rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      color: #475569;
+      margin: 1.5rem 0 0.75rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--border-color);
+    }
+
+    /* Grid for Learning Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .skill-item {
+      font-size: 0.9rem; padding: 10px 14px;
+      background: #f8fafc; border: 1px solid var(--border-color);
+      border-radius: var(--radius-md); color: var(--text-primary);
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 500;
+    }
+    .skill-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .p1 .skill-item svg { color: var(--c1); }
+    .p2 .skill-item svg { color: var(--c2); }
+    .p3 .skill-item svg { color: var(--c3); }
+    .p4 .skill-item svg { color: var(--c4); }
+    .p5 .skill-item svg { color: var(--c5); }
+
+    /* Job Roles Pills */
+    .job-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .job-pill {
+      font-size: 0.85rem; font-weight: 600; padding: 6px 14px;
+      border-radius: 50px; background: #ffffff;
+      border: 1px solid #cbd5e1; color: #334155;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+      transition: var(--transition);
+    }
+    .job-pill:hover {
+      background: #f1f5f9; border-color: #94a3b8;
+    }
+
+    /* Resources List layout */
+    .resource-list { display: flex; flex-direction: column; gap: 10px; }
+    .resource-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px; background: #ffffff;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+    .resource-item:hover {
+      border-color: #cbd5e1; transform: translateX(-4px);
+      box-shadow: var(--shadow-sm);
+    }
+    .res-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: #f1f5f9; color: var(--text-secondary);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .res-icon svg { width: 20px; height: 20px; fill: currentColor; }
+    .res-info { flex: 1; }
+    .res-name { font-size: 0.95rem; font-weight: 700; color: #0f172a; }
+    .res-desc { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+    .res-link {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.8rem; font-weight: 600; color: var(--c5);
+      text-decoration: none; margin-top: 8px;
+    }
+    .res-link:hover { text-decoration: underline; }
+    .res-link svg { width: 12px; height: 12px; fill: currentColor; }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .header-summary { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .s4, .s5 { grid-column: span 1; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .phase-header { padding: 1.25rem; flex-wrap: wrap; }
+      .phase-duration { order: 3; margin-right: auto; margin-top: 4px; }
+    }
+    @media (max-width: 480px) {
+      .header-summary { grid-template-columns: repeat(2, 1fr); }
+      .s5 { grid-column: span 2; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <header class="page-header">
+    <h1>خارطة طريق تخصص تعليم اللغة الإنجليزية والأدب</h1>
+    <p>دليلك الشامل من مرحلة التأسيس الأكاديمي وحتى القيادة والتأثير في المجال</p>
+  </header>
+
+  <nav class="header-summary" aria-label="مراحل الخارطة السريعة">
+    <div class="summary-step s1" onclick="navigateToPhase('p1')">
+      <div class="summary-num">١</div>
+      <div class="summary-name">الأساسيات</div>
+    </div>
+    <div class="summary-step s2" onclick="navigateToPhase('p2')">
+      <div class="summary-num">٢</div>
+      <div class="summary-name">الكفاءة</div>
+    </div>
+    <div class="summary-step s3" onclick="navigateToPhase('p3')">
+      <div class="summary-num">٣</div>
+      <div class="summary-name">التخصص</div>
+    </div>
+    <div class="summary-step s4" onclick="navigateToPhase('p4')">
+      <div class="summary-num">٤</div>
+      <div class="summary-name">الاحتراف</div>
+    </div>
+    <div class="summary-step s5" onclick="navigateToPhase('p5')">
+      <div class="summary-num">٥</div>
+      <div class="summary-name">القيادة</div>
+    </div>
+  </nav>
+
+  <div class="roadmap-timeline">
+    
+    <section class="phase-card p1" id="card-p1">
+      <div class="phase-header" onclick="togglePhase('p1')">
+        <div class="phase-badge">١</div>
+        <div class="phase-title-block">
+          <div class="phase-title">المرحلة الأولى — بناء الأساس اللغوي والأدبي</div>
+          <div class="phase-subtitle">Linguistic & Literary Foundations</div>
+        </div>
+        <div class="phase-duration">6–12 شهر</div>
+        <div class="chevron">
+          <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+        </div>
+      </div>
+      <div class="phase-body" id="body-p1">
+        
+        <div class="section-label">ماذا تتعلم في هذه المرحلة</div>
+        <div class="skills-grid">
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            قواعد اللغة الإنجليزية المتقدمة
+          </div>
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            مهارات الكتابة الأكاديمية
+          </div>
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            مقدمة في الأدب الإنجليزي الكلاسيكي
+          </div>
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            تحليل النصوص الأدبية الأساسي
+          </div>
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            الإشارة والتوثيق الأكاديمي (APA/MLA)
+          </div>
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            مبادئ علم اللغويات
+          </div>
+        </div>
+
+        <div class="section-label">المسميات الوظيفية المتاحة بعد هذه المرحلة</div>
+        <div class="job-list">
+          <span class="job-pill">مدرس لغة إنجليزية مبتدئ</span>
+          <span class="job-pill">English Tutor</span>
+          <span class="job-pill">مدخل بيانات لغوي</span>
+          <span class="job-pill">Language Assistant</span>
+          <span class="job-pill">مساعد أكاديمي</span>
+        </div>
+
+        <div class="section-label">مصادر تعليمية مجانية</div>
+        <div class="resource-list">
+          <div class="resource-item">
+            <div class="res-icon"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5.48 11.39l6.52 3.56 6.52-3.56L12 14.95l-6.52-3.56z"/></svg></div>
+            <div class="res-info">
+              <div class="res-name">Coursera — English Composition (Duke University)</div>
+              <div class="res-desc">كورس مجاني للتدقيق، يغطي الكتابة الأكاديمية وبناء الحجج</div>
+              <a class="res-link" href="https://www.coursera.org/learn/english-composition" target="_blank">زيارة الموقع <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></a>
+            </div>
+          </div>
+          <div class="resource-item">
+            <div class="res-icon"><svg viewBox="0 0 24 24"><path d="M12 11.55C9.64 9.35 6.48 8 3 8v11c3.48 0 6.64 1.35 9 3.55 2.36-2.2 5.52-3.55 9-3.55V8c-3.48 0-6.64 1.35-9 3.55zM12 4c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z"/></svg></div>
+            <div class="res-info">
+              <div class="res-name">Purdue OWL — Writing & Grammar</div>
+              <div class="res-desc">المرجع الأشمل مجاناً للكتابة الأكاديمية وقواعد اللغة الإنجليزية</div>
+              <a class="res-link" href="https://owl.purdue.edu" target="_blank">زيارة الموقع <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="phase-card p2" id="card-p2">
+      <div class="phase-header" onclick="togglePhase('p2')">
+        <div class="phase-badge">٢</div>
+        <div class="phase-title-block">
+          <div class="phase-title">المرحلة الثانية — الكفاءة في التعليم والأدب المقارن</div>
+          <div class="phase-subtitle">Teaching Competency & Comparative Literature</div>
+        </div>
+        <div class="phase-duration">6–12 شهر</div>
+        <div class="chevron">
+          <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+        </div>
+      </div>
+      <div class="phase-body" id="body-p2">
+        <div class="section-label">ماذا تتعلم في هذه المرحلة</div>
+        <div class="skills-grid">
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            منهجيات تدريس اللغة (CLT, TPR, Task-Based)
+          </div>
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            الأدب الحديث والمعاصر
+          </div>
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            تصميم المناهرس الدراسية
+          </div>
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            علم اللغة التطبيقي (Applied Linguistics)
+          </div>
+        </div>
+
+        <div class="section-label">المسميات الوظيفية المتاحة بعد هذه المرحلة</div>
+        <div class="job-list">
+          <span class="job-pill">معلم لغة إنجليزية في المدارس</span>
+          <span class="job-pill">EFL/ESL Teacher</span>
+          <span class="job-pill">Content Writer (English)</span>
+          <span class="job-pill">Curriculum Developer Junior</span>
+        </div>
+
+        <div class="section-label">مصادر تعليمية مجانية</div>
+        <div class="resource-list">
+          <div class="resource-item">
+            <div class="res-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C11.45 12.9 11 13.5 11 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg></div>
+            <div class="res-info">
+              <div class="res-name">FutureLearn — Teaching English (British Council)</div>
+              <div class="res-desc">دورات من المجلس الثقافي البريطاني في أساليب تدريس اللغة الإنجليزية</div>
+              <a class="res-link" href="https://www.futurelearn.com/subjects/language-courses/teach-english" target="_blank">زيارة الموقع <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="phase-card p3" id="card-p3">
+      <div class="phase-header" onclick="togglePhase('p3')">
+        <div class="phase-badge">٣</div>
+        <div class="phase-title-block">
+          <div class="phase-title">المرحلة الثالثة — التخصص والشهادات المهنية</div>
+          <div class="phase-subtitle">Specialization & Professional Certifications</div>
+        </div>
+        <div class="phase-duration">6–12 شهر</div>
+        <div class="chevron">
+          <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+        </div>
+      </div>
+      <div class="phase-body" id="body-p3">
+        <div class="section-label">ماذا تتعلم في هذه المرحلة</div>
+        <div class="skills-grid">
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            CELTA أو TEFL/TESOL الاحترافية
+          </div>
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            تقييم الطلاب وبناء الاختبارات
+          </div>
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            تحضير طلاب IELTS/TOEFL
+          </div>
+        </div>
+
+        <div class="section-label">المسميات الوظيفية المتاحة بعد هذه المرحلة</div>
+        <div class="job-list">
+          <span class="job-pill">أستاذ جامعي مساعد</span>
+          <span class="job-pill">IELTS Trainer</span>
+          <span class="job-pill">Senior EFL Teacher</span>
+          <span class="job-pill">Instructional Designer</span>
+        </div>
+
+        <div class="section-label">مصادر تعليمية مجانية</div>
+        <div class="resource-list">
+          <div class="resource-item">
+            <div class="res-icon"><svg viewBox="0 0 24 24"><path d="M12 11.55C9.64 9.35 6.48 8 3 8v11c3.48 0 6.64 1.35 9 3.55 2.36-2.2 5.52-3.55 9-3.55V8c-3.48 0-6.64 1.35-9 3.55z"/></svg></div>
+            <div class="res-info">
+              <div class="res-name">Cambridge English — Free Teaching Resources</div>
+              <div class="res-desc">مواد مجانية لتحضير المعلمين واستراتيجيات تدريس الاختبارات</div>
+              <a class="res-link" href="https://www.cambridgeenglish.org/teaching-english/" target="_blank">زيارة الموقع <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="phase-card p4" id="card-p4">
+      <div class="phase-header" onclick="togglePhase('p4')">
+        <div class="phase-badge">٤</div>
+        <div class="phase-title-block">
+          <div class="phase-title">المرحلة الرابعة — الاحتراف البحثي والأكاديمي</div>
+          <div class="phase-subtitle">Research Mastery & Academic Excellence</div>
+        </div>
+        <div class="phase-duration">12–18 شهر</div>
+        <div class="chevron">
+          <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+        </div>
+      </div>
+      <div class="phase-body" id="body-p4">
+        <div class="section-label">ماذا تتعلم في هذه المرحلة</div>
+        <div class="skills-grid">
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            البحث الأكاديمي في الأدب واللغويات
+          </div>
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            الترجمة الأدبية الاحترافية (إنجليزي - عربي)
+          </div>
+        </div>
+
+        <div class="section-label">المسميات الوظيفية المتاحة بعد هذه المرحلة</div>
+        <div class="job-list">
+          <span class="job-pill">أستاذ جامعي</span>
+          <span class="job-pill">Researcher / Academic Writer</span>
+          <span class="job-pill">رئيس قسم لغة إنجليزية</span>
+          <span class="job-pill">Literary Translator</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="phase-card p5" id="card-p5">
+      <div class="phase-header" onclick="togglePhase('p5')">
+        <div class="phase-badge">٥</div>
+        <div class="phase-title-block">
+          <div class="phase-title">المرحلة الخامسة — القيادة والتأثير في المجال</div>
+          <div class="phase-subtitle">Leadership, Innovation & Field Impact</div>
+        </div>
+        <div class="phase-duration">مستمر</div>
+        <div class="chevron">
+          <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+        </div>
+      </div>
+      <div class="phase-body" id="body-p5">
+        <div class="section-label">ماذا تتعلم في هذه المرحلة</div>
+        <div class="skills-grid">
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            قيادة الأقسام الأكاديمية وإدارة الكليات
+          </div>
+          <div class="skill-item">
+            <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            تأليف المناهج والكتب التعليمية الدولية
+          </div>
+        </div>
+
+        <div class="section-label">المسميات الوظيفية المتاحة</div>
+        <div class="job-list">
+          <span class="job-pill">Full Professor</span>
+          <span class="job-pill">عميد كلية الآداب / التربية</span>
+          <span class="job-pill">مستشار وزاري للتعليم الدولي</span>
+          <span class="job-pill">مؤسس مدرسة لغات / مركز تدريب دولي</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+  // التبديل الكلاسيكي الذكي لفتح وإغلاق العناصر بطريقة سلسة
+  function togglePhase(id) {
+    const card = document.getElementById('card-' + id);
+    const body = document.getElementById('body-' + id);
+    const header = card.querySelector('.phase-header');
+    
+    const isOpen = body.classList.contains('show');
+    
+    // إغلاق كل البطاقات المفتوحة مسبقاً (اختياري لتجربة أنظف)
+    document.querySelectorAll('.phase-body').forEach(b => b.classList.remove('show'));
+    document.querySelectorAll('.phase-header').forEach(h => h.classList.remove('open'));
+
+    if (!isOpen) {
+      body.classList.add('show');
+      header.classList.add('open');
+    }
+  }
+
+  // وظيفة التنقل السريع عند الضغط على أزرار الداشبورد العلوي
+  function navigateToPhase(id) {
+    togglePhase(id);
+    const card = document.getElementById('card-' + id);
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+
+</body>
+</html>
